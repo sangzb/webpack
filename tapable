@@ -1,0 +1,41 @@
+tapable使用：
+const {
+  SyncHook, // webpack
+  SyncBailHook, // webpack
+  SyncWaterfallHook,
+  SyncLoopHook,
+  AsyncParallelHook, // webpack
+  AsyncParallelBailHook,
+  AsyncSeriesHook, // webpack
+  AsyncSeriesBailHook,
+  AsyncSeriesWaterfallHook
+}
+
+
+class MyTapable {
+  this.hook = {
+    hook1: new SyncHook(['name']),
+    hook2: new SyncBailHook([]),
+    hook3: new AsyncParalleHook(['name1', 'name2', 'name3']),
+    hook4: new AsyncSeriesHook(['name1', 'name2'])
+  }
+
+  registerHook1 () {
+    this.hook.hook1.tap('event1', (name1) => {
+      console.log('event1', name1);
+    })
+
+    this.hook1.tap('event2', (name1) => {
+      console.log('event2', name1);
+    })
+  }
+
+  envoke1 () {
+    this.hook.hook1.call('SYNCHOOK')
+  }
+}
+
+
+
+tapable钩子说明：
+SyncHook：
