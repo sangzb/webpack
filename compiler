@@ -1,1 +1,30 @@
 
+~/webpack/lib/Compiler
+
+
+
+compiler 所有注册的事件（详见源码）
+shouldEmit
+done
+additionalPass
+beforeRun
+run
+emit
+afterEmit
+thisCompilation
+compilation
+normalModuleFactory
+contextModuleFactory
+beforeCompile
+compile
+make
+afterCompile
+watchRun
+failed
+invalid
+watchClose
+environment
+afterEnvironment
+afterPlugins
+afterResolvers
+entryOption
