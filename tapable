@@ -39,7 +39,7 @@ class MyTapable {
   }
 
   envokeAsync () {
-    this.hook.asyncHook.callAsync('ASYNCHOOK');
+    this.hook.asyncHook.callAsync('ASYNCHOOK', 'param2');
   }
 }
 
