@@ -1,0 +1,41 @@
+webpack-cli:
+  processOptions()；
+  
+  try {
+    // 获得webpack本体
+    compiler = webpack(options);
+  } catch (err) {
+    if (err.name === "WebpackOptionsValidationError") {
+      if (argv.color) console.error(`\u001b[1m\u001b[31m${err.message}\u001b[39m\u001b[22m`);
+      else console.error(err.message);
+      // eslint-disable-next-line no-process-exit
+      process.exit(1);
+    }
+
+    throw err;
+  }
+  // 是否将过程显示在控制台上，顺序可见的第一个plugin，可作为plugin的学习。
+  if (argv.progress) {
+    const ProgressPlugin = require("webpack").ProgressPlugin;
+    new ProgressPlugin({
+      profile: argv.profile
+    }).apply(compiler);
+  }
+  // 编译过程控制台显示内容的控制
+  if (outputOptions.infoVerbosity === "verbose") {
+    if (argv.w) {
+      compiler.hooks.watchRun.tap("WebpackInfo", compilation => {
+        const compilationName = compilation.name ? compilation.name : "";
+        console.error("\nCompilation " + compilationName + " starting…\n");
+      });
+    } else {
+      compiler.hooks.beforeRun.tap("WebpackInfo", compilation => {
+        const compilationName = compilation.name ? compilation.name : "";
+        console.error("\nCompilation " + compilationName + " starting…\n");
+      });
+    }
+    compiler.hooks.done.tap("WebpackInfo", compilation => {
+      const compilationName = compilation.name ? compilation.name : "";
+      console.error("\nCompilation " + compilationName + " finished\n");
+    });
+  }
