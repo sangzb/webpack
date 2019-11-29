@@ -1,1 +1,22 @@
 
+webpack-dev-server/bin/webpack-dev-server.js为入口
+
+1.生成webpack对象
+ try {
+    compiler = webpack(config);
+  } catch (err) {
+    // throw err;
+  }
+  
+2.生成server对象
+try {
+    server = new Server(compiler, options, log);
+  } catch (err) {
+    // throw err;
+  }
+  
+webpack-dev-server/Server.js
+
+updateCompiler(compiler, options);
+  addEntries(webpackConfig, options);
+ 
